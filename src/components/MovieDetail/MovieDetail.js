@@ -27,6 +27,11 @@ const MovieDetail = () => {
         info.map(items => geners.push(items.name))
         return geners.toString()
     }
+    const calculateSeriesRuntime = (info) => {
+        let calculatedTime = 0;
+        info.map(mins => calculatedTime = mins + calculatedTime);
+        return calculatedTime
+    }
 
 
 
@@ -36,12 +41,11 @@ const MovieDetail = () => {
                 <img src={"https://image.tmdb.org/t/p/w200" + data.poster_path} alt='' />
             </div>
             <div className='section-right' style={{ backgroundImage: `URL(https://image.tmdb.org/t/p/w500${data.backdrop_path})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-                <p className='movie_title'>{data.original_title}</p>
-                <p>Release Date : {data.release_date}</p>
+                <p className='movie_title'>{data.original_title ? data.original_title : data.original_name}</p>
+                <p>Release Date : {data.release_date ? data.release_date : data.last_air_date}</p>
                 <p>Countries : {data.production_countries && destractureCountries(data.production_countries)}</p>
                 <p>Genres : {data.genres && destractureGenres(data.genres)}</p>
-                <p>Duration : {data.runtime}</p>
-                <p>Actors : {data.release_date}</p>
+                <p>Duration : {data.runtime ? data.runtime : data.episode_run_time && calculateSeriesRuntime(data.episode_run_time)} Minutes</p>
                 <p>Description : {data.overview}</p>
             </div>
             <div className='section-right'></div>
