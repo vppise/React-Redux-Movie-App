@@ -18,6 +18,14 @@ export const fetchAsyncShows = createAsyncThunk('movies/fetchAsyncShows', async 
     const response = await movieApi.get(`3/tv/popular?api_key=${APIKey}&language=en-US&page=1`)
     return response.data;
 })
+export const searchAsynchMovies = createAsyncThunk('movies/searchAsynchMovies', async (name) => {
+    const response = await movieApi.get(`3/search/movie?api_key=${APIKey}&language=en-US&query=${name}`)
+    return response.data;
+})
+export const searchAsyncSeries = createAsyncThunk('movies/searchAsyncSeries', async (name) => {
+    const response = await movieApi.get(`3/search/tv?api_key=${APIKey}&language=en-US&query=${name}`)
+    return response.data;
+})
 
 const initialState = {
     movies: {},
@@ -57,6 +65,14 @@ const movieSlice = createSlice({
             console.log('fetch successfully')
             return { ...state, selectedMovieOrShow: payload }
         },
+        [searchAsynchMovies.fulfilled]: (state, { payload }) => {
+            console.log('Search Successful');
+            return { ...state, movies: payload }
+        },
+        [searchAsyncSeries.fulfilled]: (state, { payload }) => {
+            console.log('searched series');
+            return { ...state, shows: payload }
+        }
     }
 });
 
@@ -64,4 +80,5 @@ export const { removeSelectedMovie } = movieSlice.actions;
 export const getAllMovies = (state) => state.movies.movies;
 export const getAllShows = (state) => state.movies.shows;
 export const getSelectedMovieOrShow = (state) => state.movies.selectedMovieOrShow;
+export const getSearchedMovies = (state) => state.movies.movies;
 export default movieSlice.reducer;

@@ -21,3 +21,22 @@
     height: 38px;
     border-radius: 50%;
 }
+
+.search-movies {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-box {
+    height: 30px;
+    width: 200px;
+    border-radius: 10px;
+
+}
+
+.fa-magnifying-glass {
+    color: white;
+    padding-left: 15px;
+    cursor: pointer;
+}

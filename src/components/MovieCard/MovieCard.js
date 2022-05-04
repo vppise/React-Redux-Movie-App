@@ -12,7 +12,7 @@ const MovieCard = (props) => {
             <Link to={`/movie/${data.id}`} >
                 <div className='card-inner'>
                     <div className='card-top'>
-                        <img src={"https://image.tmdb.org/t/p/w200" + data.poster_path} alt={data.original_title} />
+                        <img src={data.poster_path !== null ? "https://image.tmdb.org/t/p/w200" + data.poster_path : "https://via.placeholder.com/400"} alt={data.original_title} />
                     </div>
                     <div className='card-bottom'>
                         <div className='card-info'>
